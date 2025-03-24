@@ -1,4 +1,5 @@
 langgraph
+langgraph-api
 langgraph-sdk
 langgraph-checkpoint-sqlite
 langsmith
@@ -10,3 +11,5 @@ tavily-python
 wikipedia
 trustcall
 langgraph-cli[inmem]
+langgraph-cli
+python-dotenv
