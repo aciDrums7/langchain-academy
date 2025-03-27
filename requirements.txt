@@ -1,5 +1,6 @@
 langgraph
 langgraph-api
+langgraph-prebuilt
 langgraph-sdk
 langgraph-checkpoint-sqlite
 langsmith
