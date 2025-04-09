@@ -220,5 +220,6 @@ $RECYCLE.BIN/
 *.lnk
 module-6/deployment/docker-compose.yml
 
-**/.langgraph_api/
+**/.langgraph_api/**
 **/.langraph_**
+**/.ipynb_checkpoints/**
