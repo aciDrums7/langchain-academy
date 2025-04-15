@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import MessagesState, StateGraph, START, END
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain_core.messages import HumanMessage, SystemMessage
+from langgraph.checkpoint.memory import MemorySaver
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -82,14 +83,21 @@ builder.add_conditional_edges(
 builder.add_edge("tools", "assistant")
 builder.add_edge("assistant", END)
 
+# * SHORT TERM MEMORY (it resets after each execution of this script file)
 # Compile graph
-graph = builder.compile()
+graph = builder.compile(checkpointer=MemorySaver())
+
+# Specify a thread
+config = {"configurable": {"thread_id": "1"}}
 
 # Run graph
 if __name__ == "__main__":
     input = HumanMessage(content="how much is (((1 + 2) * 7) / 3) - 1?")
-    result = graph.invoke({"messages": [input]})
+    result = graph.invoke({"messages": [input]}, config)
+
+    # Testing memory
+    input = HumanMessage(content="Multiply that by 3")
+    result = graph.invoke({"messages": [input]}, config)
+
     for m in result["messages"]:
         m.pretty_print()
-
-# TODO: implement memory
