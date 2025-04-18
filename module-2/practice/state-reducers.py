@@ -56,6 +56,7 @@ def node_3(state):
 
 
 # Build graph
+# builder = StateGraph(DefaultState)
 builder = StateGraph(CustomReducerState)
 builder.add_node("custom_node_1", custom_node_1)
 builder.add_node("node_2", node_2)
